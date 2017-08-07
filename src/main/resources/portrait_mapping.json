@@ -1,0 +1,199 @@
+{
+  "index": "user_portrait",
+  "type": "docs",
+  "from": "${from}",
+  "size": "10",
+  "query_type": "bool_query",
+  "bool_query": [
+    {
+      "bool_type": "must",
+      "items": [
+        {
+          "value": "",
+          "key": "province_code",
+          "terms_method": "term" //term,terms,range,match
+        }
+      ]
+    }
+  ],
+  "terms_level_query": {
+    "terms_level_type": "terms_query",
+    "term_query": {
+      "value": "",
+      "key": "",
+      "boost": 2
+    },
+    "terms_query": {
+      "value": "", //数组
+      "key": ""
+    },
+    "range_query": {
+      "key": "",
+      "range": "", //[,]
+      "boost": "",
+      "format": "",
+      "include_lower": true,
+      "include_upper": false
+    },
+    "exists_query": {
+      "key": ""
+    },
+    "prefix_query": {
+      "key": "",
+      "value": "",
+      "boost": 2.0
+    },
+    "wildcard_query": {//通配符匹配
+      "key": "",
+      "value": "",
+      "boost": 2.0
+    },
+    "regexp_query": {//正则匹配
+      "key": "",
+      "value": "",
+      "boost": 2.0
+    },
+    "ids_query": {
+      "type": "",
+      "values": ""
+    }
+  },
+  "text_query": {
+    "text_query_type": "match_query",
+    "match_query": {
+      "key": "",
+      "value": "this is a test",
+      "zero_terms_query": "all"//是否使用停词
+    },
+    "multi_match_query": {
+      "value": "",
+      "fields": "", //在多个字段中搜索,可使用通配符,支持使用^表示权重,如^3表示三倍权重,
+      "type": "best_fields"//most_fields,cross_fields,phrase,phrase_prefix
+    },
+    "query_string": {
+      "value": "",
+      "fields": ""//数组
+    },
+    "simple_query_string": {
+      "value": "",
+      "fields": "", //数组
+      "default_operate": "and"
+    }
+  },
+  "match_all_query": {
+    "boost": 2.0
+  },
+  "aggregations": [
+    {
+      "aggregation_type": "avg",
+      "name": "",
+      "field": ""
+    },
+    {
+      "aggregation_type": "terms",
+      "name": "",
+      "field": "",
+      "size": "${size.value}",
+      "sort": "asc",
+      "sort_by": "_count",
+      "sub_aggregations":{  //子聚合
+          "aggregation_type": "terms",
+          "name": "",
+          "field": "",
+          "size": "${size.value}",
+          "sort": "asc",
+          "sort_by": "_count"
+      }
+    },
+    {
+      "aggregation_type": "cardinality",
+      "name": "",
+      "field": ""
+    },
+    {
+      "aggregation_type": "extended_stats",
+      "name": "",
+      "field": "",
+      "missing_value": ""
+    },
+    {
+      "aggregation_type": "max",
+      "name": "",
+      "field": "",
+      "missing_value": ""
+    },
+    {
+      "aggregation_type": "min",
+      "name": "",
+      "field": "",
+      "missing_value": ""
+    },
+    {
+      "aggregation_type": "stats",
+      "name": "",
+      "field": "",
+      "missing_value": ""
+    },
+    {
+      "aggregation_type": "sum",
+      "name": "",
+      "field": "",
+      "missing_value": ""
+    },
+    {
+      "aggregation_type": "top_hits",
+      "name": "",
+      "sort_field": "",
+      "from": "",
+      "size": ""
+    },
+    {
+      "aggregation_type": "value_count",
+      "name": "",
+      "field": "",
+      "missing_value": ""
+    },
+    {
+      "aggregation_type": "range",
+      "name": "",
+      "field": "",
+      "range_list": [
+        {
+          "key": "",
+          "from": "",
+          "to": ""
+        }
+      ]
+    },
+    {
+      "aggregation_type": "missing",
+      "name": "",
+      "field": ""
+    },
+    {
+      "aggregation_type": "date_range",
+      "name": "",
+      "field": "",
+      "format": "",
+      "range_list": [
+        {
+          "key": "",
+          "from": "",
+          "to":""
+        }
+      ]
+    },
+    {
+      "aggregation_type": "ipv4_range",
+      "name": "",
+      "field": "",
+      "range_list":[
+        {
+          "key":"",
+          "from":"",
+          "to":""
+        }
+      ]
+    }
+  ]
+}
