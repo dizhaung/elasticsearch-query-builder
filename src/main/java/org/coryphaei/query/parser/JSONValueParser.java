@@ -69,16 +69,16 @@ public class JSONValueParser {
      * @return
      */
     public static Object[] getRangeValue(String value) {
-        Asserts.notNull(value, "range_value can't be null");
+        Asserts.notNull(value, "range_value");
         String item = value.replaceAll("\\[(.*?)\\]", "$1").trim();
         String[] split = item.split(",");
         Object[] result = new Object[2];
-        if (split.length > 1) {
+        if (item.contains(",") && split.length >= 1) {
             if (!"".equals(split[0]) && !"\"\"".equals(split[0])) {
                 result[0] = split[0].trim();
             }
 
-            if (!"".equals(split[1]) && !"\"\"".equals(split[1])) {
+            if (split.length > 1 && !"".equals(split[1]) && !"\"\"".equals(split[1])) {
                 result[1] = split[1].trim();
             }
         }
