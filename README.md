@@ -2,7 +2,7 @@
 #### Introduction
 `elasticsearch-query-parser` is used for building [elasticsearch](https://www.elastic.co) query DSL. if there are so many query conditions, you won't build so complex elasticsearch DSL link before, and a config file is just enough using `elasticsearch-query-parser`. I belive that it will help you make your code simple and easy-understand.
 
-See [chinese README](https://github.com/xiaowei1118/elasticsearch-query-parser/blob/master/README-CN.md) here.
+[中文文档](https://github.com/xiaowei1118/elasticsearch-query-parser/blob/master/README-CN.md)
 
 #### How to use it
 At the first of all,create a config file following `elasticsearch-query-parser` rules just like the sample below.It is a standard json file.
