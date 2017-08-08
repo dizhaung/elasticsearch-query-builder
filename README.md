@@ -18,7 +18,21 @@ At the first of all,create a config file following `elasticsearch-query-parser` 
       "key": "key",
       "boost": 2
     }
-}
+},
+"aggregations": [    //add aggregations
+   {
+     "aggregation_type": "terms",
+     "name": "",
+     "field": "field",
+     "sub_aggregations":{   //sub aggregations
+          "aggregation_type": "terms",
+          "name": "sub",
+          "field": "field",
+          "size": "${size.value}",
+          "sort": "asc",
+          "sort_by": "_count"
+      }
+   }
 ```
 Here are the [config file example](https://github.com/xiaowei1118/elasticsearch-query-parser/blob/master/src/main/resources/portrait_mapping.json).
 
