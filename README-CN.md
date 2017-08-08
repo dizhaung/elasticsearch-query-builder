@@ -54,7 +54,7 @@
 
 注意，如果是一个range_query的范围查询, json数据中必须是如 `[a, b]` 格式的字符串，a表示范围的起点，b表示范围的终点, a和b可以同时为空，但是`,`不可缺省。
 
-##### Use
+##### 使用
 clone`elasticsearch-query-parser`并且在本地执行 'mvn package',本项目一般以jar包的形式为您的项目提供服务，或者将源码导入项目目录中也可。
 
 ## License
