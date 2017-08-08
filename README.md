@@ -2,6 +2,8 @@
 #### Introduction
 `elasticsearch-query-parser` is used for building [elasticsearch](https://www.elastic.co) query DSL. if there are so many query conditions, you won't build so complex elasticsearch DSL link before, and a config file is just enough using `elasticsearch-query-parser`. I belive that it will help you make your code simple and easy-understand.
 
+See [chinese README](https://github.com/xiaowei1118/elasticsearch-query-parser/blob/master/README-CN.md) here.
+
 #### How to use it
 At the first of all,create a config file following `elasticsearch-query-parser` rules just like the sample below.It is a standard json file.
 ```
@@ -51,10 +53,10 @@ There are three query_type defined in `elasticsearch-query-parser`,and <strong>t
 
 ##### data-parser
 In addition to parsing config file , `elasticsearch-query-parser` parser parameters from JSONObject(alibaba [fastjson](https://github.com/alibaba/fastjson) object).We use the form of `${}` to indicate that the field needs to be fetched from an external data source, just as `${a}` indicates that we get a value from a field in Jsonobject. If you need to get data from a deeper level of JSON, just use`.` to represents a hierarchy, such as `${a.b.c}`. <br/>
-If it is a range query, the `JSON data` must be a string in [a, b] format, a and b can be empty, but `a` can't be.
+If it is a range query, the `JSON data` must be a string in `[a, b]` format, a and b can be empty, but `a` can't be.
 
 ##### Use
 clone this project and execute 'mvn package' and just use it as a `jar` file.
 
 ## License
-java_server is available under the [MIT](https://www.opensource.org/licenses/mit-license.php) license. See the LICENSE file for more info.
+elasticsearch-query-parser is available under the [MIT](https://www.opensource.org/licenses/mit-license.php) license. See the LICENSE file for more info.
