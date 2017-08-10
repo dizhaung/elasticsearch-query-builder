@@ -30,9 +30,9 @@ public class ZWAggregationParser {
     public static TermsBuilder termsAggregation(JSONObject item, JSONObject data) {
         Boolean ifAsc;
         if (item.getString("sort") != null && "desc".equals(item.getString("sort"))) {
-            ifAsc = true;
-        } else {
             ifAsc = false;
+        } else {
+            ifAsc = true;
         }
 
         String sizeStr = JSONValueParser.getValue(item.getString("size"), data);
