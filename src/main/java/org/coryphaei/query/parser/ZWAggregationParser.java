@@ -5,6 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import org.coryphaei.query.Range;
 import org.coryphaei.query.builder.ZWAggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramBuilder;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
+import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
 import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeBuilder;
@@ -138,4 +142,10 @@ public class ZWAggregationParser {
         return ZWAggregationBuilder.iPv4RangeBuilder(item.getString("name"), item.getString("field"), ranges);
     }
 
+    public static DateHistogramBuilder dateHistogramBuilder(JSONObject item) {
+        return ZWAggregationBuilder.dateHistogramBuilder(item.getString("name"), item.getString("field"),
+                item.getString("interval"), item.getString("format"), item.getString("time_zone"), item.getString("offset"),
+                item.getString("sort"), item.get("missing"));
+    }
+    
 }

@@ -4,6 +4,9 @@ import org.coryphaei.query.Range;
 import org.coryphaei.query.SortField;
 import org.elasticsearch.search.aggregations.AggregationBuilder;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramBuilder;
+import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogramInterval;
+import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
 import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.date.DateRangeBuilder;
@@ -264,5 +267,35 @@ public class ZWAggregationBuilder {
 
     public static AggregationBuilder histogramBuilder(String name, String field, int interval) {
         return AggregationBuilders.histogram(name).field(field).interval(interval);
+    }
+
+    public static DateHistogramBuilder dateHistogramBuilder(String name, String field, String interval, String format, String timeZone, String offset, String sort, Object missing) {
+        DateHistogramBuilder dateHistogramBuilder = AggregationBuilders.dateHistogram(name).field(field).interval(new DateHistogramInterval(interval));
+
+        if (format != null) {
+            dateHistogramBuilder.format(format);
+        }
+
+        if (timeZone != null) {
+            dateHistogramBuilder.timeZone(timeZone);
+        }
+
+        if (offset != null) {
+            dateHistogramBuilder.offset(offset);
+        }
+
+        if (sort != null) {
+            if ("desc".equalsIgnoreCase(sort)) {
+                dateHistogramBuilder.order(Histogram.Order.KEY_DESC);
+            } else {
+                dateHistogramBuilder.order(Histogram.Order.KEY_ASC);
+            }
+        }
+
+        if (missing != null) {
+            dateHistogramBuilder.missing(missing);
+        }
+
+        return dateHistogramBuilder;
     }
 }

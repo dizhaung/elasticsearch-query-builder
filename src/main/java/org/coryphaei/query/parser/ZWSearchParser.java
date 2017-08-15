@@ -140,6 +140,9 @@ public class ZWSearchParser {
             case "histogram":
                 aggregationBuilder = ZWAggregationParser.histogramBuilder(item);
                 break;
+            case "date_histogram":
+                aggregationBuilder = ZWAggregationParser.dateHistogramBuilder(item);
+                break;
             default:
                 throw new Exception("aggregation_type not support yet");
         }
