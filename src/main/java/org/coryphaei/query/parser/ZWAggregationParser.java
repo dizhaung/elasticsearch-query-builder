@@ -43,7 +43,7 @@ public class ZWAggregationParser {
         Integer size = null;
         if (sizeStr != null) {
             size = Integer.valueOf(sizeStr);
-            if (size <= 0) size = null;
+            if (size < 0) size = null;
         }
 
         return ZWAggregationBuilder.termsAggregationBuilder(item.getString("name"), item.getString("field")
