@@ -53,9 +53,9 @@ There are three query_type defined in `elasticsearch-query-parser`,and <strong>t
 
 ##### data-parser
 In addition to parsing config file , `elasticsearch-query-parser` parser parameters from JSONObject(alibaba [fastjson](https://github.com/alibaba/fastjson) object).We use the form of `${}` to indicate that the field needs to be fetched from an external data source, just as `${a}` indicates that we get a value from a field in Jsonobject. If you need to get data from a deeper level of JSON, just use`.` to represents a hierarchy, such as `${a.b.c}`. <br/>
-If it is a range query, the `JSON data` must be a string in `[a, b]` format, a and b can be empty, but `a` can't be.
+If it is a range query, the `JSON data` must be a string in `[a, b]` format, a and b can be empty, but `,` can't be.
 
-##### Use
+##### Run and use
 clone this project and execute 'mvn package' and just use it as a `jar` file.
 
 ## License
