@@ -8,7 +8,6 @@ import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
 import org.elasticsearch.search.aggregations.bucket.range.RangeBuilder;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.sort.SortBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +52,14 @@ public class ZWSearchParser {
         if (item.get("sort") != null) {
             JSONArray sortArray = item.getJSONArray("sort");
             for (int i = 0; i < sortArray.size(); i++) {
-                JSONObject sortItem = sortArray.getJSONObject(i);
-                searchSourceBuilder.sort(sortBuilder(sortItem, data));
+                Object sort = sortArray.get(i);
+                if (sort instanceof String) {
+                    if (sort.equals("_score")) {    //_score sort
+                        searchSourceBuilder.sort(ZWOrderParser.scoreSortBuilder());
+                    }
+                } else {
+                    searchSourceBuilder.sort(ZWOrderParser.fieldSortBuilder((JSONObject) sort, data));
+                }
             }
         }
 
@@ -67,10 +72,6 @@ public class ZWSearchParser {
         }
 
         return searchSourceBuilder;
-    }
-
-    private static SortBuilder sortBuilder(JSONObject sortItem, JSONObject data) {
-        return ZWOrderParser.fieldSortBuilder(sortItem, data);
     }
 
     public static List<AbstractAggregationBuilder> addAggregations(JSONObject data, JSONArray aggregationsArr) throws Exception {

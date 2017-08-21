@@ -85,4 +85,27 @@ public class JSONValueParser {
 
         return result;
     }
+
+    /**
+     * 向JSON指定位置放入某值
+     *
+     * @param key 键值
+     * @param data 数据
+     * @param value 要放入的值
+     */
+    public static void putValue(String key, JSONObject data, Object value) {
+        String[] properties = key.split("\\.");
+        JSONObject item = data;
+        for (int i = 0; i < properties.length - 1; i++) {
+            if (item.getJSONObject(properties[i]) == null) {
+                item.put(properties[i], new JSONObject());
+            }
+
+            item = item.getJSONObject(properties[i]);
+        }
+
+        if (item != null) {
+            item.put(properties[properties.length - 1], value);
+        }
+    }
 }
