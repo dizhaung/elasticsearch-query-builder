@@ -35,6 +35,15 @@ At the first of all,create a config file following `elasticsearch-query-builder`
           "sort_by": "_count"
       }
    }
+ ],
+ "sort": [
+     "_score",
+     {
+       "field": "age",
+       "order": "asc"
+     }
+   ]
+}
 ```
 Here are the [config file example](https://github.com/xiaowei1118/elasticsearch-query-builder/blob/master/src/main/resources/portrait_mapping.json).
 

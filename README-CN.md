@@ -33,6 +33,15 @@
           "sort_by": "_count"
       }
    }
+ ],
+ "sort": [
+      "_score",
+      {
+        "field": "age",
+        "order": "asc"
+      }
+ ]
+}
 ```
 这是配置文件的[样例](https://github.com/xiaowei1118/elasticsearch-query-builder/blob/master/src/main/resources/portrait_mapping.json).
 
