@@ -3,6 +3,7 @@
   "query_type":"bool_query",
   "size":"${pageSize}",
   "from":"${offset}",
+  "include_source": ["age"],
   "sort":[
     {
       "field":"date_time",

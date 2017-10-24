@@ -4,6 +4,8 @@
   "from": "${from}",
   "size": "10",
   "query_type": "bool_query",
+  "include_source": ["name","age"],  //需要哪些字段
+  "exclude_source": ["sex"],  //排除哪些字段
   "bool_query": [
     {
       "bool_type": "must",

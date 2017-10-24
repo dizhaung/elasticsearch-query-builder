@@ -41,7 +41,7 @@ public class ZWTermsLevelQueryParser {
 
     public static QueryBuilder existsQueryBuilder(JSONObject item, JSONObject data) {
         String value = JSONValueParser.getValue(item.getString("value"), data);
-        if (item.getString("must").equals(value) || (item.getString("value") == null && item.getString("must") == null)) {
+        if ((item.getString("value") == null && item.getString("must") == null) || item.getString("must").equals(value)  ) {
             return ZWQueryBuilder.existsQueryBuilder(item.getString("key"));
         }
 

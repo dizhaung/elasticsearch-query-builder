@@ -49,6 +49,12 @@ public class ZWSearchParser {
             }
         }
 
+
+        String[] includeSource = new String[]{};
+        String[] excludeSource = new String[]{};
+        searchSourceBuilder.fetchSource(item.getJSONArray("include_source") != null ? item.getJSONArray("include_source").toArray(includeSource) : null,
+                item.getJSONArray("exclude_source") != null ? item.getJSONArray("exclude_source").toArray(excludeSource) : null);
+
         if (item.get("sort") != null) {
             JSONArray sortArray = item.getJSONArray("sort");
             for (int i = 0; i < sortArray.size(); i++) {
