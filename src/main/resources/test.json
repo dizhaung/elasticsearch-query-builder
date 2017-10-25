@@ -50,5 +50,12 @@
       "items":[]
     }
   ],
+  "highlight":[
+    {
+      "field": "content",
+      "fragment_size": 20,
+      "number_of_fragment": 2
+    }
+  ],
   "type":"docs"
 }

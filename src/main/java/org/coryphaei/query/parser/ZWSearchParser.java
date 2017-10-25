@@ -2,6 +2,7 @@ package org.coryphaei.query.parser;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.coryphaei.query.builder.ZWHighlightBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.aggregations.bucket.missing.MissingBuilder;
@@ -19,6 +20,7 @@ public class ZWSearchParser {
     public static SearchSourceBuilder searchSourceBuilder(JSONObject item, JSONObject data) throws Exception {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
+        //query
         if (item.get("query_type") != null) {
             switch (item.getString("query_type")) {
                 case "bool_query":
@@ -35,6 +37,7 @@ public class ZWSearchParser {
             }
         }
 
+        //from
         if (item.getString("from") != null) {
             String from = JSONValueParser.getValue(item.getString("from"), data);
             if (from != null) {
@@ -42,6 +45,7 @@ public class ZWSearchParser {
             }
         }
 
+        //size
         if (item.getString("size") != null) {
             String size = JSONValueParser.getValue(item.getString("size"), data);
             if (size != null) {
@@ -49,12 +53,13 @@ public class ZWSearchParser {
             }
         }
 
-
+        //_source
         String[] includeSource = new String[]{};
         String[] excludeSource = new String[]{};
         searchSourceBuilder.fetchSource(item.getJSONArray("include_source") != null ? item.getJSONArray("include_source").toArray(includeSource) : null,
                 item.getJSONArray("exclude_source") != null ? item.getJSONArray("exclude_source").toArray(excludeSource) : null);
 
+        //sort
         if (item.get("sort") != null) {
             JSONArray sortArray = item.getJSONArray("sort");
             for (int i = 0; i < sortArray.size(); i++) {
@@ -69,6 +74,7 @@ public class ZWSearchParser {
             }
         }
 
+        //aggregations
         if (item.get("aggregations") != null) {
             JSONArray aggregationsArr = item.getJSONArray("aggregations");
             for (int i = 0; i < aggregationsArr.size(); i++) {
@@ -77,9 +83,28 @@ public class ZWSearchParser {
             }
         }
 
+        //post_filter
+//        if (item.get("post_filter") != null) {
+//            JSONObject postFilterObj = item.getJSONObject("post_filter");
+//            searchSourceBuilder.postFilter()
+//        }
+
+        //high_light
+        if (item.get("highlight") != null) {
+            searchSourceBuilder.highlight(ZWHighlightBuilder.getHighlightBuilder(item.getJSONArray("highlight")));
+        }
+
         return searchSourceBuilder;
     }
 
+    /**
+     * get aggregations
+     *
+     * @param data
+     * @param aggregationsArr
+     * @return
+     * @throws Exception
+     */
     public static List<AbstractAggregationBuilder> addAggregations(JSONObject data, JSONArray aggregationsArr) throws Exception {
         List<AbstractAggregationBuilder> aggregationBuilderList = new ArrayList<>();
         for (int i = 0; i < aggregationsArr.size(); i++) {

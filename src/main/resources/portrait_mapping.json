@@ -207,5 +207,27 @@
       "offset":"asc",
       "missing":""
     }
+  ],
+  "highlight":[
+    {
+      "field":"",
+      "fragment_size": 1,
+      "number_of_fragment": 2
+    }
   ]
+//  "post_filter":{
+//    "filter_method":"and",
+//    "items":[
+//      {
+//        "method": "term",
+//        "field": "",
+//        "value": ""
+//      },
+//      {
+//        "method": "term",
+//        "field": "",
+//        "value": ""
+//      }
+//    ]
+//  }
 }

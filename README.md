@@ -8,41 +8,48 @@
 At the first of all,create a config file following `elasticsearch-query-builder` rules just like the sample below.It is a standard json file.
 ```
 {
-"index": "user_portrait",
-"type": "docs",
-"from": "${from}",
-"size": "10",
-"query_type": "terms_level_query",
-"terms_level_query": {
+  "index": "user_portrait",
+  "type": "docs",
+  "from": "${from}",
+  "size": "10",
+  "query_type": "terms_level_query",
+  "terms_level_query": {
     "terms_level_type": "term_query",
     "term_query": {
       "value": "${value}",
       "key": "key",
       "boost": 2
     }
-},
-"aggregations": [    //add aggregations
-   {
-     "aggregation_type": "terms",
-     "name": "",
-     "field": "field",
-     "sub_aggregations":{   //sub aggregations
-          "aggregation_type": "terms",
-          "name": "sub",
-          "field": "field",
-          "size": "${size.value}",
-          "sort": "asc",
-          "sort_by": "_count"
+  },
+  "aggregations": [
+    {
+      "aggregation_type": "terms",
+      "name": "",
+      "field": "field",
+      "sub_aggregations": {
+        "aggregation_type": "terms",
+        "name": "sub",
+        "field": "field",
+        "size": "${size.value}",
+        "sort": "asc",
+        "sort_by": "_count"
       }
-   }
- ],
- "sort": [
-     "_score",
-     {
-       "field": "age",
-       "order": "asc"
-     }
-   ]
+    }
+  ],
+  "highlight": [
+    {
+      "field": "content",
+      "fragment_size": 20,
+      "number_of_fragment": 2
+    }
+  ],
+  "sort": [
+    "_score",
+    {
+      "field": "age",
+      "order": "asc"
+    }
+  ]
 }
 ```
 Here are the [config file example](https://github.com/xiaowei1118/elasticsearch-query-builder/blob/master/src/main/resources/portrait_mapping.json).

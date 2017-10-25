@@ -6,41 +6,48 @@
 首先,需要构造一个遵循 `elasticsearch-query-builder` 定义规则的配置文件， 如下所示. 它是一个标准的json文件。
 ```
 {
-"index": "user_portrait",
-"type": "docs",
-"from": "${from}",
-"size": "10",
-"query_type": "terms_level_query",
-"terms_level_query": {
+  "index": "user_portrait",
+  "type": "docs",
+  "from": "${from}",
+  "size": "10",
+  "query_type": "terms_level_query",
+  "terms_level_query": {
     "terms_level_type": "term_query",
     "term_query": {
       "value": "${value}",
       "key": "key",
       "boost": 2
     }
-},
-"aggregations": [    //支持聚合操作
-   {
-     "aggregation_type": "terms",
-     "name": "",
-     "field": "field",
-     "sub_aggregations":{   //子聚合
-          "aggregation_type": "terms",
-          "name": "sub",
-          "field": "field",
-          "size": "${size.value}",
-          "sort": "asc",
-          "sort_by": "_count"
+  },
+  "aggregations": [
+    {
+      "aggregation_type": "terms",
+      "name": "",
+      "field": "field",
+      "sub_aggregations": {
+        "aggregation_type": "terms",
+        "name": "sub",
+        "field": "field",
+        "size": "${size.value}",
+        "sort": "asc",
+        "sort_by": "_count"
       }
-   }
- ],
- "sort": [
-      "_score",
-      {
-        "field": "age",
-        "order": "asc"
-      }
- ]
+    }
+  ],
+  "highlight": [
+    {
+      "field": "content",
+      "fragment_size": 20,
+      "number_of_fragment": 2
+    }
+  ],
+  "sort": [
+    "_score",
+    {
+      "field": "age",
+      "order": "asc"
+    }
+  ]
 }
 ```
 这是配置文件的[样例](https://github.com/xiaowei1118/elasticsearch-query-builder/blob/master/src/main/resources/portrait_mapping.json).
