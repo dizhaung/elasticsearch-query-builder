@@ -1,5 +1,6 @@
 package org.coryphaei.query.parser;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.coryphaei.query.DocumentField;
 import org.apache.http.util.Asserts;
@@ -89,8 +90,8 @@ public class JSONValueParser {
     /**
      * 向JSON指定位置放入某值
      *
-     * @param key 键值
-     * @param data 数据
+     * @param key   键值
+     * @param data  数据
      * @param value 要放入的值
      */
     public static void putValue(String key, JSONObject data, Object value) {
@@ -107,5 +108,14 @@ public class JSONValueParser {
         if (item != null) {
             item.put(properties[properties.length - 1], value);
         }
+    }
+
+    public static String[] convertJSONArr2StringArr(JSONArray arr) {
+        String[] strArr = new String[]{};
+        if (arr != null) {
+            strArr = arr.toArray(strArr);
+        }
+
+        return strArr;
     }
 }

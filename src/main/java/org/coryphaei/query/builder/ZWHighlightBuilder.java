@@ -2,6 +2,7 @@ package org.coryphaei.query.builder;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.coryphaei.query.parser.JSONValueParser;
 import org.elasticsearch.search.highlight.HighlightBuilder;
 
 /**
@@ -9,14 +10,23 @@ import org.elasticsearch.search.highlight.HighlightBuilder;
  */
 public class ZWHighlightBuilder {
 
-    public static HighlightBuilder getHighlightBuilder(JSONArray hightLightArr) {
+    public static HighlightBuilder getHighlightBuilder(JSONObject highlight) {
         HighlightBuilder highlightBuilder = new HighlightBuilder();
-        hightLightArr.forEach(item -> {
+        JSONArray highlightArr = highlight.getJSONArray("fields");
+        highlightArr.forEach(item -> {
             if (item != null) {
-                highlightBuilder.field(((JSONObject) item).getString("field"),((JSONObject) item).getInteger("fragment_size"),((JSONObject) item).getInteger("number_of_fragment"));
+                highlightBuilder.field(((JSONObject) item).getString("field"),
+                        ((JSONObject) item).getInteger("fragment_size") != null ? ((JSONObject) item).getInteger("fragment_size") : 150,
+                        ((JSONObject) item).getInteger("number_of_fragment") != null ? ((JSONObject) item).getInteger("number_of_fragment") : 5);
             }
         });
 
+        highlightBuilder.preTags(JSONValueParser.convertJSONArr2StringArr(highlight.getJSONArray("pre_tags")));
+        highlightBuilder.postTags(JSONValueParser.convertJSONArr2StringArr((highlight.getJSONArray("post_tags"))));
+        highlightBuilder.tagsSchema(highlight.getString("tags_schema"));
+        highlightBuilder.order(highlight.getString("order"));
+
         return highlightBuilder;
     }
+
 }

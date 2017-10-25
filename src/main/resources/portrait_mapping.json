@@ -208,13 +208,19 @@
       "missing":""
     }
   ],
-  "highlight":[
-    {
-      "field":"",
-      "fragment_size": 1,
-      "number_of_fragment": 2
-    }
-  ]
+  "highlight":{
+    "fields": [
+      {
+        "field": "content",
+        "number_of_fragment": 2,
+        "no_match_size": 150
+      }
+    ],
+    "pre_tags":[],
+    "post_tags":[],
+    "tags_schema":"", //styled
+    "order":"asc"
+  }
 //  "post_filter":{
 //    "filter_method":"and",
 //    "items":[

@@ -53,11 +53,8 @@ public class ZWSearchParser {
             }
         }
 
-        //_source
-        String[] includeSource = new String[]{};
-        String[] excludeSource = new String[]{};
-        searchSourceBuilder.fetchSource(item.getJSONArray("include_source") != null ? item.getJSONArray("include_source").toArray(includeSource) : null,
-                item.getJSONArray("exclude_source") != null ? item.getJSONArray("exclude_source").toArray(excludeSource) : null);
+        searchSourceBuilder.fetchSource(JSONValueParser.convertJSONArr2StringArr(item.getJSONArray("include_source")),
+                JSONValueParser.convertJSONArr2StringArr(item.getJSONArray("exclude_source")));
 
         //sort
         if (item.get("sort") != null) {
@@ -91,7 +88,7 @@ public class ZWSearchParser {
 
         //high_light
         if (item.get("highlight") != null) {
-            searchSourceBuilder.highlight(ZWHighlightBuilder.getHighlightBuilder(item.getJSONArray("highlight")));
+            searchSourceBuilder.highlight(ZWHighlightBuilder.getHighlightBuilder(item.getJSONObject("highlight")));
         }
 
         return searchSourceBuilder;

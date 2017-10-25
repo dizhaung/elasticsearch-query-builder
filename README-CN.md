@@ -34,13 +34,17 @@
       }
     }
   ],
-  "highlight": [
-    {
-      "field": "content",
-      "fragment_size": 20,
-      "number_of_fragment": 2
-    }
-  ],
+  "highlight":{
+      "fields": [
+            {
+              "field": "content",
+              "number_of_fragment": 2,
+              "no_match_size": 150
+            }
+       ],
+      "pre_tags":["<em>"],
+      "post_tags":["</em>"]
+  },
   "sort": [
     "_score",
     {
